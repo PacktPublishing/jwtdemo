@@ -66,6 +66,8 @@ public class JwtController {
     @GetMapping("/currentUser")
     public UserModel getCurrentUser(Principal principal) {
         UserDetails userDetails =  this.customUserDetailService.loadUserByUsername(principal.getName());
-        return (UserModel) userDetails;
+        UserModel um = (UserModel) userDetails;
+        um.setPassword(null);
+        return um;
     }
 }

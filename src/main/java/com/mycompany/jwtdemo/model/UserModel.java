@@ -2,10 +2,6 @@ package com.mycompany.jwtdemo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mycompany.jwtdemo.entity.RoleEntity;
-import com.mycompany.jwtdemo.entity.UserEntity;
-import com.mycompany.jwtdemo.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

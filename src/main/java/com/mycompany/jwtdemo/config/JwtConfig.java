@@ -40,6 +40,8 @@ public class JwtConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf()
                 .disable()
+                .cors()
+                .and()
                 .authorizeRequests()
                 .antMatchers("/api/login", "/api/register").permitAll()//only allow this endpoint without authentication
                 .anyRequest().authenticated()//for any other request, authentication should performed

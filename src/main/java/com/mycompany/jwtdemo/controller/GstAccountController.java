@@ -30,6 +30,7 @@ public class GstAccountController {
         return ResponseEntity.status(201).body(gadto);
     }
 
+
     @GetMapping("/accounts/{caId}")
     public ResponseEntity<List<GstAccountDTO>>
     getAllMyGstAccounts(@PathVariable("caId") Long caId,

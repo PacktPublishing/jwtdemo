@@ -27,4 +27,5 @@ public class GstAccountEntity {
     private String firmName;
     private Long caId;
     private LocalDate creationDate;
+    private String active;
 }

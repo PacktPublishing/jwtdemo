@@ -1,13 +1,16 @@
 package com.mycompany.jwtdemo.service;
 
+import com.mycompany.jwtdemo.entity.GstAccountEntity;
 import com.mycompany.jwtdemo.entity.GstFiledEntity;
 import com.mycompany.jwtdemo.entity.GstNotFiledEntity;
 import com.mycompany.jwtdemo.model.GstTrackerDTO;
 import com.mycompany.jwtdemo.model.GstTrackerDetail;
 import com.mycompany.jwtdemo.model.GstTrackerWrapper;
+import com.mycompany.jwtdemo.repository.GstAccountRepository;
 import com.mycompany.jwtdemo.repository.GstFiledRepository;
 import com.mycompany.jwtdemo.repository.GstNotFiledRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormatSymbols;
@@ -22,8 +25,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class GstFiledService {
+
     @Autowired
     private GstFiledRepository filedRepository;
+    @Autowired
+    private GstApiCallService gstApiCallService;
+    @Autowired
+    private GstAccountRepository gstAccountRepository;
 
     @Autowired
     private GstNotFiledRepository notFiledRepository;
@@ -108,5 +116,27 @@ public class GstFiledService {
         List<String> months = Arrays.stream(monthsList).collect(Collectors.toList());
         months.removeIf(String::isBlank);
         return months;
+    }
+
+    public String getFinancialYear(){
+        LocalDate ld = LocalDate.now();
+        Integer currentYear = ld.getYear();
+        Integer prevYear = currentYear - 1;
+        String fy = prevYear+"-"+currentYear.toString().substring(2);
+        return fy;
+    }
+
+    //https://stackoverflow.com/questions/7979165/spring-cron-expression-for-every-after-30-minutes
+    //@Scheduled(cron = "0 0/10 * * * ?")//every 10 min
+    public void scheduleGetFilings(){
+        System.out.println("*******Scheduler Started***********");
+        //Delete all rows first than insert
+        //filedRepository.deleteAll();
+        //Read all GST number from GstAccount table
+        List<GstAccountEntity> allGstAccEntities = gstAccountRepository.findAll();
+        for(GstAccountEntity gae: allGstAccEntities) {
+            gstApiCallService.getAllFilingsWithFeign(gae.getGstNo(), getFinancialYear(), "obify.consulting@gmail.com");
+        }
+        System.out.println("*******Scheduler Iteration Ended***********");
     }
 }

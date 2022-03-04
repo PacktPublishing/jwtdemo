@@ -1,0 +1,29 @@
+Error
+-----------
+Response Body
+{
+  "status_cd": "0",
+  "status_desc": "GSTR request failed",
+  "error": {
+    "message": "API Under Maintenance in DC2",
+    "error_cd": "GEN5008"
+  },
+  "header": {
+    "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"98\", \"Google Chrome\";v=\"98\"",
+    "client_id": "GSPb98f32c8-5d3a-446d-aa0c-66509f2a722f",
+    "sec-ch-ua-mobile": "?0",
+    "client_secret": "GSPbb142ee0-80c5-40de-8bde-a51811452266",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-site": "same-site",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-dest": "empty",
+    "gstin": "21ACJPT0060G1ZZ"
+  }
+}
+Response Code
+200
+Response Header
+{
+  "content-type": "application/json;charset=UTF-8"
+}
+---------

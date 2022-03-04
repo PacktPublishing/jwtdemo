@@ -35,7 +35,7 @@ public class GstAccountService {
     public List<GstAccountDTO> getAllMyGstAccounts(Long caId, Pageable pageable){
 
         List<GstAccountEntity> gstAccountEntities = null;
-        Page<GstAccountEntity> pagedAccounts = gstAccountRepository.findByCaId(caId, pageable);
+        Page<GstAccountEntity> pagedAccounts = gstAccountRepository.findByCaIdAndActiveContains(caId, "Y", pageable);
 
         gstAccountEntities = pagedAccounts.getContent();
 

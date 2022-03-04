@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/gst")
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class GstController {
 
     @Autowired

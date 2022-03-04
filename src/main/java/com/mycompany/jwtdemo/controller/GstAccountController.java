@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/gst")
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class GstAccountController {
 
     @Autowired

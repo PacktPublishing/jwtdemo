@@ -30,7 +30,7 @@ public class GstAccountController {
         return ResponseEntity.status(201).body(gadto);
     }
 
-    @GetMapping("/accounts/{accountId}")
+    @GetMapping("/accounts/detail/{accountId}")
     public GstAccountDTO getAccountDetail(@PathVariable("accountId") Long accountId){
         GstAccountDTO gstAccountDTO = gstAccountService.getAccountDetail(accountId);
         return gstAccountDTO;

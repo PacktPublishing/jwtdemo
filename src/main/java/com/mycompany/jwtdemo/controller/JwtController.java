@@ -70,4 +70,10 @@ public class JwtController {
         um.setPassword(null);
         return um;
     }
+
+    @GetMapping("checkTokenValidity")
+    public Boolean checkTokenValidity(@RequestHeader("Authorization") String authHeader){
+        //remove Bearer from header
+        return jwtUtil.isTokenExpired(authHeader.substring(7));
+    }
 }

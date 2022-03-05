@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GstAccountService {
@@ -29,6 +30,40 @@ public class GstAccountService {
         GstAccountEntity gse = gstAccountRepository.save(gstAccountEntity);
         BeanUtils.copyProperties(gse, gstAccountDTO);
 
+        return gstAccountDTO;
+    }
+
+    public GstAccountDTO getAccountDetail(Long accountId){
+        Optional<GstAccountEntity> optge = gstAccountRepository.findById(accountId);
+        GstAccountDTO gstAccountDTO = null;
+        if(optge.isPresent()){
+            gstAccountDTO = new GstAccountDTO();
+            BeanUtils.copyProperties(optge.get(), gstAccountDTO);
+        }
+        return gstAccountDTO;
+    }
+
+    public GstAccountDTO updateAccount(GstAccountDTO gstAccountDTO, Long accountId){
+        Optional<GstAccountEntity> optge = gstAccountRepository.findById(accountId);
+        if(optge.isPresent()){
+            GstAccountEntity ge = optge.get();
+            BeanUtils.copyProperties(gstAccountDTO, ge);
+            ge = gstAccountRepository.save(ge);
+            BeanUtils.copyProperties(ge, gstAccountDTO);
+        }
+        return gstAccountDTO;
+    }
+
+    public GstAccountDTO deleteUpdateAccount(Long accountId){
+        Optional<GstAccountEntity> optge = gstAccountRepository.findById(accountId);
+        GstAccountDTO gstAccountDTO = null;
+        if(optge.isPresent()){
+            GstAccountEntity ge = optge.get();
+            ge.setActive("N");
+            ge = gstAccountRepository.save(ge);
+            gstAccountDTO = new GstAccountDTO();
+            BeanUtils.copyProperties(ge, gstAccountDTO);
+        }
         return gstAccountDTO;
     }
 

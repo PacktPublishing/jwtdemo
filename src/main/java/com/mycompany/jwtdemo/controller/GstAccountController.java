@@ -30,6 +30,23 @@ public class GstAccountController {
         return ResponseEntity.status(201).body(gadto);
     }
 
+    @GetMapping("/accounts/{accountId}")
+    public GstAccountDTO getAccountDetail(@PathVariable("accountId") Long accountId){
+        GstAccountDTO gstAccountDTO = gstAccountService.getAccountDetail(accountId);
+        return gstAccountDTO;
+    }
+
+    @DeleteMapping("/accounts/{accountId}")
+    public GstAccountDTO deleteUpdateAccount(@PathVariable("accountId") Long accountId){
+        GstAccountDTO gstAccountDTO = gstAccountService.deleteUpdateAccount(accountId);
+        return gstAccountDTO;
+    }
+
+    @PutMapping("/accounts/{accountId}")
+    public GstAccountDTO updateAccount(GstAccountDTO gstAccountDTO, @PathVariable("accountId") Long accountId){
+        gstAccountDTO = gstAccountService.updateAccount(gstAccountDTO, accountId);
+        return gstAccountDTO;
+    }
 
     @GetMapping("/accounts/{caId}")
     public ResponseEntity<List<GstAccountDTO>>

@@ -43,7 +43,7 @@ public class GstAccountController {
     }
 
     @PutMapping("/accounts/{accountId}")
-    public GstAccountDTO updateAccount(GstAccountDTO gstAccountDTO, @PathVariable("accountId") Long accountId){
+    public GstAccountDTO updateAccount(@RequestBody GstAccountDTO gstAccountDTO, @PathVariable("accountId") Long accountId){
         gstAccountDTO = gstAccountService.updateAccount(gstAccountDTO, accountId);
         return gstAccountDTO;
     }

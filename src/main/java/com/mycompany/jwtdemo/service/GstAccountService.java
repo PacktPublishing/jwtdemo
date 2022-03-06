@@ -26,6 +26,7 @@ public class GstAccountService {
         GstAccountEntity gstAccountEntity = new GstAccountEntity();
         BeanUtils.copyProperties(gstAccountDTO, gstAccountEntity);
         gstAccountEntity.setCreationDate(LocalDate.now());
+        gstAccountEntity.setActive("Y");
 
         GstAccountEntity gse = gstAccountRepository.save(gstAccountEntity);
         BeanUtils.copyProperties(gse, gstAccountDTO);

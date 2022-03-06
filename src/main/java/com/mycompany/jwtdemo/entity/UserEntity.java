@@ -21,6 +21,7 @@ public class UserEntity {
     private String lastName;
     private String email;
     private String phone;
+    private String active;
 
     @JsonManagedReference//helps avoid circular dependency in bidirectional mapping
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -91,5 +92,13 @@ public class UserEntity {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getActive() {
+        return active;
+    }
+
+    public void setActive(String active) {
+        this.active = active;
     }
 }

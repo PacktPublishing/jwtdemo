@@ -34,7 +34,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(userModel, userEntity);//it does not do a deep copy
-
+        userEntity.setActive("N");
         Set<RoleEntity> roleEntities = new HashSet<>();
         //fetch every role from DB based on role id and than set this role to user entity roles
         for(RoleModel rm :userModel.getRoles()){
@@ -66,7 +66,7 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-         UserEntity userEntity = userRepository.findByUsername(userName);
+         UserEntity userEntity = userRepository.findByUsernameAndActiveContains(userName, "Y");
 
         if(userEntity == null){//here you can make a DB call with the help of repository and do the validation
             throw new UsernameNotFoundException("User does not exist!");

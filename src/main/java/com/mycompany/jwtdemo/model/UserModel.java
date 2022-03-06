@@ -20,6 +20,8 @@ public class UserModel implements UserDetails {
     private String lastName;
     private String email;
     private String phone;
+    private String active;
+
     private Set<RoleModel> roles = new HashSet<>();
 
     public Long getId() {
@@ -51,7 +53,10 @@ public class UserModel implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        if(active.equals("Y")) {
+            return true;
+        }
+        return false;
     }
 
     public void setUsername(String username) {
@@ -113,5 +118,13 @@ public class UserModel implements UserDetails {
 
     public void setRoles(Set<RoleModel> roles) {
         this.roles = roles;
+    }
+
+    public String getActive() {
+        return active;
+    }
+
+    public void setActive(String active) {
+        this.active = active;
     }
 }

@@ -10,7 +10,6 @@ import com.mycompany.jwtdemo.repository.GstAccountRepository;
 import com.mycompany.jwtdemo.repository.GstFiledRepository;
 import com.mycompany.jwtdemo.repository.GstNotFiledRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormatSymbols;
@@ -107,7 +106,10 @@ public class GstFiledService {
             notFiledEntities.add(gnfe);
         });
         filedEntitiesWithReturnType.forEach(gstFiledEntity -> notFiledEntities.removeIf(gstNotFiledEntity ->
-                gstNotFiledEntity.getNotFiled().getMonth() == gstFiledEntity.getDateOfFiling().getMonth()));
+                (gstNotFiledEntity.getNotFiled().getMonth() == gstFiledEntity.getDateOfFiling().getMonth()) &&
+                     (gstNotFiledEntity.getNotFiled().getYear() == gstFiledEntity.getDateOfFiling().getYear())
+
+        ));
         notFiledRepository.saveAll(notFiledEntities);
     }
 
@@ -122,8 +124,7 @@ public class GstFiledService {
         LocalDate ld = LocalDate.now();
         Integer currentYear = ld.getYear();
         Integer prevYear = currentYear - 1;
-        String fy = prevYear+"-"+currentYear.toString().substring(2);
-        return fy;
+        return prevYear+"-"+currentYear.toString().substring(2);
     }
 
     //https://stackoverflow.com/questions/7979165/spring-cron-expression-for-every-after-30-minutes

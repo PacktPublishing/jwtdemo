@@ -49,6 +49,7 @@ public class GstAccountService {
         if(optge.isPresent()){
             GstAccountEntity ge = optge.get();
             BeanUtils.copyProperties(gstAccountDTO, ge);
+            ge.setCreationDate(LocalDate.now());
             ge = gstAccountRepository.save(ge);
             BeanUtils.copyProperties(ge, gstAccountDTO);
         }

@@ -63,8 +63,20 @@ public class GstFiledService {
                 break;
             case "BOTH":
                 trackerDTO = createGstWrapperByReturnType(filedEntities,"GSTR1");
+                trackerDTO.setFiledCount(
+                        trackerDTO.getFilingDetails().stream().filter(obj-> obj.getIsFiled()==Boolean.TRUE).count()
+                );
+                trackerDTO.setNotFiledCount(
+                        trackerDTO.getFilingDetails().stream().filter(obj-> obj.getIsFiled()==Boolean.FALSE).count()
+                );
                 dtoList.add(trackerDTO);
                 trackerDTO = createGstWrapperByReturnType(filedEntities,"GSTR3B");
+                trackerDTO.setFiledCount(
+                        trackerDTO.getFilingDetails().stream().filter(obj-> obj.getIsFiled()==Boolean.TRUE).count()
+                );
+                trackerDTO.setNotFiledCount(
+                        trackerDTO.getFilingDetails().stream().filter(obj-> obj.getIsFiled()==Boolean.FALSE).count()
+                );
                 dtoList.add(trackerDTO);
                 break;
             default:

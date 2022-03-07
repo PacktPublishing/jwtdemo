@@ -10,4 +10,6 @@ import java.util.List;
 public class GstTrackerDTO {
     private String returnType;
     private List<GstTrackerDetail> filingDetails;
+    private Long filedCount;
+    private Long notFiledCount;
 }

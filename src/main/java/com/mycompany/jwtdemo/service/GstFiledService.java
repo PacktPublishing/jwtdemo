@@ -36,7 +36,7 @@ public class GstFiledService {
     }
 
     //https://stackoverflow.com/questions/7979165/spring-cron-expression-for-every-after-30-minutes
-    @Scheduled(cron = "0 0/2 * * * ?")//every 10 min
+    //@Scheduled(cron = "0 0/2 * * * ?")//every 2 min
     public void scheduleGetFilings(){
         System.out.println("*******Scheduler Started***********");
         //Delete all rows first than insert

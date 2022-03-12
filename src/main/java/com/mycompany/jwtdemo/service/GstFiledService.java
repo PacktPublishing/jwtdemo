@@ -8,6 +8,7 @@ import com.mycompany.jwtdemo.repository.GstAccountRepository;
 import com.mycompany.jwtdemo.repository.GstFiledRepository;
 import com.mycompany.jwtdemo.util.GstUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -35,11 +36,11 @@ public class GstFiledService {
     }
 
     //https://stackoverflow.com/questions/7979165/spring-cron-expression-for-every-after-30-minutes
-    //@Scheduled(cron = "0 0/10 * * * ?")//every 10 min
+    @Scheduled(cron = "0 0/2 * * * ?")//every 10 min
     public void scheduleGetFilings(){
         System.out.println("*******Scheduler Started***********");
         //Delete all rows first than insert
-        //filedRepository.deleteAll();
+        filedRepository.deleteAll();
         //Read all GST number from GstAccount table
         List<GstAccountEntity> allGstAccEntities = gstAccountRepository.findAll();
         for(GstAccountEntity gae: allGstAccEntities) {

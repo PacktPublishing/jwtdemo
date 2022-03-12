@@ -11,15 +11,12 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@Entity(name = "gst_filed_tracker")
-public class GstFiledEntity {
+@Entity(name = "gst_not_filed_tracker")
+public class NotFiledOverviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String gstNo;
     private String returnType;
-    private LocalDate returnPeriod;
-    private String status;
-    private String mode;
-    private LocalDate dateOfFiling;
+    private LocalDate notFiledDate;
 }

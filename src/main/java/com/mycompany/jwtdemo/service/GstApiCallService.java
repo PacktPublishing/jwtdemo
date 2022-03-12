@@ -62,7 +62,7 @@ public class GstApiCallService {
         GstWrapperModel gfwm = null;
         try {
             //making actual Govt. GST API call
-            //gfwm = gstFeignClient.getAllFilings(gstNo, fy, email);
+            gfwm = gstFeignClient.getAllFilings(gstNo, fy, email);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -77,7 +77,7 @@ public class GstApiCallService {
                     gstFiledEntity.setGstNo(gfwm.getHeader().getGstin());
                     LocalDate localDate = LocalDate.parse(gdm.getDof(), formatter);
                     gstFiledEntity.setDateOfFiling(localDate);
-                    gstFiledEntity.setReturnPeriod(gdm.getRet_prd());
+                    gstFiledEntity.setReturnPeriod(convertReturnPeriodDate(gdm.getRet_prd()));
                     gstFiledEntity.setStatus(gdm.getStatus());
                     gstFiledEntity.setMode(gdm.getMof());
                     filedRepository.save(gstFiledEntity);
@@ -87,5 +87,12 @@ public class GstApiCallService {
         }
         //log after successful insertion of all records for 1 GST number
         return gfwm;
+    }
+
+    private LocalDate convertReturnPeriodDate(String returnPeriod){
+        return LocalDate
+                .of(Integer.parseInt(returnPeriod.substring(2)),
+                        Integer.parseInt(returnPeriod.substring(0,2)),
+                        1 );
     }
 }

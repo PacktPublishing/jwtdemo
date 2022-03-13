@@ -1,0 +1,6 @@
+GET
+http://localhost:8080/api/gst/get-reports/1?fiscalYear=2021&month=April&returnType=GSTR1
+GET
+http://localhost:8080/api/gst/get-reports/1?fiscalYear=2021&month=April&returnType=BOTH
+GET
+http://localhost:8080/api/gst/get-filing-det/1?fy=2021-22

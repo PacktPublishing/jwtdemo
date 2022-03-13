@@ -3,7 +3,7 @@ package com.mycompany.jwtdemo.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.time.LocalDate;
 import java.util.Map;
 
 @Getter
@@ -12,8 +12,8 @@ public class FilingOverviewDTO {
 
     private String firmName;
     private String gstNo;
-    private String returnPeriodGstr1;
+    private LocalDate returnPeriodGstr1;
     private Map<String, Integer> gstr1NotFiledPeriod;
-    private String returnPeriodGst3b;
+    private LocalDate returnPeriodGst3b;
 
 }

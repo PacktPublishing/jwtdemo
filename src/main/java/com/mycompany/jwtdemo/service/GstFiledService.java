@@ -28,27 +28,6 @@ public class GstFiledService {
     @Autowired
     private GstUtil util;
 
-    public String getFinancialYear(){
-        LocalDate ld = LocalDate.now();
-        Integer currentYear = ld.getYear();
-        Integer prevYear = currentYear - 1;
-        return prevYear+"-"+currentYear.toString().substring(2);
-    }
-
-    //https://stackoverflow.com/questions/7979165/spring-cron-expression-for-every-after-30-minutes
-    //@Scheduled(cron = "0 0/2 * * * ?")//every 2 min
-    public void scheduleGetFilings(){
-        System.out.println("*******Scheduler Started***********");
-        //Delete all rows first than insert
-        filedRepository.deleteAll();
-        //Read all GST number from GstAccount table
-        List<GstAccountEntity> allGstAccEntities = gstAccountRepository.findAll();
-        for(GstAccountEntity gae: allGstAccEntities) {
-            gstApiCallService.getAllFilingsWithFeign(gae.getGstNo(), getFinancialYear(), "obify.consulting@gmail.com");
-        }
-        System.out.println("*******Scheduler Iteration Ended***********");
-    }
-
     public GstTrackerWrapper getAllDetails(String gstNo, LocalDate customFromDate, LocalDate customToDate , String gstReturnType) {
         List<GstFiledEntity> filedEntities = filedRepository.findAllByGstNoAndDateOfFilingBetween(gstNo, customFromDate, customToDate);
         GstTrackerWrapper wrapper = util.createGstWrapper(gstNo);

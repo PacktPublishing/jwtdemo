@@ -3,11 +3,14 @@ package com.mycompany.jwtdemo.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 public class NotFiledDTO {
-    private Long gstNo;
+    private String gstNo;
     private String firmName;
-    private String gstr1NotFiled;
-    private String gst3bNotFiled;
+    private String returnType;
+    private Boolean isGstFiled;
+    private LocalDate dateOfGstFiling;
 }

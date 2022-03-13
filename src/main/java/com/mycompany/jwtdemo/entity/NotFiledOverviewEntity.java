@@ -18,5 +18,6 @@ public class NotFiledOverviewEntity {
     private Long id;
     private String gstNo;
     private String returnType;
-    private LocalDate notFiledDate;
+    private Boolean isGstFiled;
+    private LocalDate dateOfGstFiling;
 }
